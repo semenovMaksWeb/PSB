@@ -2,7 +2,7 @@
 /* drop function */
 DROP FUNCTION public.user_insert;
 DROP FUNCTION user_get_id;
-DROP FUNCTION user_check_active;
+DROP FUNCTION user_update_active;
 /* drop function */
 
 CREATE OR REPLACE FUNCTION public.user_insert(
@@ -57,7 +57,7 @@ $function$;
 
 
 
-CREATE OR REPLACE FUNCTION public.user_check_active(_id_user int4, out status_ boolean, out error_ text)
+CREATE OR REPLACE FUNCTION public.user_update_active(_id_user int4, out status_ boolean, out error_ text)
 	RETURNS record
 	LANGUAGE plpgsql
 AS $function$
@@ -87,4 +87,5 @@ $function$;
 /* start function */
 select * from public.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
 select * from public.user_get_id(1); 
+select * from public.user_update_active(1); 
 /* start function */
