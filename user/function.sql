@@ -1,8 +1,6 @@
-
 /* drop function */
 DROP FUNCTION public.user_insert;
 DROP FUNCTION user_get_id;
-DROP FUNCTION user_update_active;
 /* drop function */
 
 CREATE OR REPLACE FUNCTION public.user_insert(
@@ -57,35 +55,7 @@ $function$;
 
 
 
-CREATE OR REPLACE FUNCTION public.user_update_active(_id_user int4, out status_ boolean, out error_ text)
-	RETURNS record
-	LANGUAGE plpgsql
-AS $function$
-	declare
-		user_ public.user_check_active;
-	BEGIN
-       select u.id, u.active into user_  from "user" u where u.id  = _id_user;
-       if user_.id is null then
-			status_ = false;
-       		select 'Пользователь не существует' into error_;
-       		PERFORM public.log_insert(null, 'Был передан не корректный id - ' || _id_user || ' пользователя');
-    	end if;
-    	if user_.active = true then
-			status_ = false;
-       		select 'Пользователь уже активен для использования' into error_;
-       		PERFORM public.log_insert(_id_user, 'Пользователь пытался повторно подвердить активацию аккаунта');
-    	end if;
-    	if error_ is null then
-    		update public."user" set active = true;
-			status_ = true;
-    		PERFORM public.log_insert(_id_user, 'Пользователь успешно активирован');
-    	end if;
-	END;
-$function$;
-
-
 /* start function */
 select * from public.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
 select * from public.user_get_id(1); 
-select * from public.user_update_active(1); 
 /* start function */

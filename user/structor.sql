@@ -10,8 +10,3 @@ CREATE TABLE public."user" (
 	"date" timestamp NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT id_user PRIMARY KEY (id)
 );
-
-create type public."user_check_active" AS (
-	id int4,
-	active bool
-)
