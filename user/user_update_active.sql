@@ -9,7 +9,7 @@ AS $function$
 	declare
 		user_ user_check_active;
 	BEGIN
-       select u.id, u.active into user_  from "user" u where u.id  = _id_user;
+       select u.id, u.active into user_  from public.user_get_active(_id_user);
 	   select * into result_type_ from public.user_check_id(user_);
 		if user_.active = true then
 			select 0 as status_, 'Пользователь уже активен для использования' as error_ into result_type_ ;
