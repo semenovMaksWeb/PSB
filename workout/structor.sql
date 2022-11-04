@@ -1,5 +1,5 @@
 CREATE TABLE public.workout (
-	"id" int4 NOT NULL,
+	"id" int4 NOT NULL GENERATED ALWAYS AS IDENTITY,
 	"id_user" integer NOT NULL,
 	"date" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT "workout_pk" PRIMARY KEY ("id"),
