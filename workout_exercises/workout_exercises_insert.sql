@@ -1,4 +1,4 @@
- CREATE OR REPLACE FUNCTION public.workout_exercises_insert(
+ CREATE OR REPLACE FUNCTION public.workout_exercises_update(
 	_id_user int4,
 	_id_workourt int4,
 	_ids_exercises int4[],
