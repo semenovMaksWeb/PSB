@@ -14,7 +14,7 @@ AS $function$
 		if result_type_.status_ <> 0 then
 			insert into public.workout_exercises (id_workourt, id_exercises, weight) 
 			values (_id_workourt, unnest(_ids_exercises), unnest(_weight));
-            PERFORM public.log_insert(_id_user, 'Пользователь успешно изменил тренировку id - ' || id_);
+            PERFORM public.log_insert(_id_user, 'Пользователь успешно изменил тренировку id - ' || _id_workourt);
 		end if;
 	END;
 $function$;
