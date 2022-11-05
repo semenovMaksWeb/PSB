@@ -1,0 +1,15 @@
+INSERT INTO public.exercises ("name", id_user) VALUES('Жим ногами лежа', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Сгибание ног в тренажере', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Сведение ног в тренажере', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Разгибание ног на блочном тренажере', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Жим лежа', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Сведения в тренажере «Бабочка»', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Тяга вертикального блока', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Тяга горизонтального блока', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Жим Арнольда', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Подъем гантелей через стороны', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Поднятие штанги к подбородку', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Подъем гантелей перед собой', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Сгибание рук в кроссовере', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('Разгибание рук в кроссовере', 1);
+INSERT INTO public.exercises ("name", id_user) VALUES('французский жим лежа', 1);
