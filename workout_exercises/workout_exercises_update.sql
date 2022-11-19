@@ -1,4 +1,4 @@
- CREATE OR REPLACE FUNCTION public.workout_exercises_update(
+ CREATE OR REPLACE FUNCTION sport.workout_exercises_update(
 	_id_user int4,
 	_id_workourt int4,
 	_ids_exercises int4[],
@@ -12,7 +12,7 @@ AS $function$
 	begin
 		select * into result_type_ from public.workout_check(_id_workourt,_id_user);
 		if result_type_.status_ <> 0 then
-			DELETE from workout_exercises  we where we.id_workourt = _id_workourt;
+			DELETE from workout_exercises we where we.id_workourt = _id_workourt;
 			insert into public.workout_exercises (id_workourt, id_exercises, weight) 
 			values (_id_workourt, unnest(_ids_exercises), unnest(_weight));
             PERFORM public.log_insert(_id_user, 'Пользователь успешно изменил тренировку id - ' || _id_workourt);
@@ -20,4 +20,4 @@ AS $function$
 	END;
 $function$;
 
-select * from workout_exercises_update(1, 3, array[1,2,3], array[100, 20, 50])
+select * from sport.workout_exercises_update(1, 3, array[1,2,3], array[100, 20, 50])
