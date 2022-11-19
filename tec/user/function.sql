@@ -17,8 +17,8 @@ CREATE OR REPLACE FUNCTION tec.user_insert(
 AS $function$
 	BEGIN
         INSERT INTO tec."user" 
-		(nik, email, "password", surname, "name", patronymic ) 
-		VALUES (_nik, _email, _password, _surname, _name, _patronymic ) 
+		(nik, email, "password", surname, "name", patronymic) 
+		VALUES (_nik, _email, _password, _surname, _name, _patronymic) 
 	 	RETURNING id into id_;
 
         PERFORM tec.log_insert(id_, 'Пользователь создан');
