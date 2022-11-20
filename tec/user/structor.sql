@@ -10,4 +10,6 @@ CREATE TABLE tec."user" (
 	"date" timestamp NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT id_user PRIMARY KEY (id)
 );
+
 CREATE UNIQUE INDEX user_nik_idx ON tec."user" USING btree (nik);
+CREATE UNIQUE INDEX user_email_idx ON tec."user" (email);
