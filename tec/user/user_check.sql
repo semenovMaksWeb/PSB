@@ -64,9 +64,9 @@ AS $function$
 $function$;
 
 /** Обрабатывается в конфиге */
-CREATE OR REPLACE FUNCTION tec.user_check_unique(_nik varchar, _email varchar)
-	RETURNS table (status integer, nik text[], email text[])
-	LANGUAGE plpgsql
+CREATE OR REPLACE FUNCTION tec.user_check_unique(_nik character varying, _email character varying)
+ RETURNS TABLE(status integer, nik text[], email text[])
+ LANGUAGE plpgsql
 AS $function$
 	declare
 		nik_ varchar;
@@ -79,12 +79,14 @@ AS $function$
 		elseif nik_ is NOT NULL then
 			return query  select 0 as status, array['Текущий ник пользователя занят'] as nik, array[]::text[] as email;
 		elseif email_ is NOT NULL then
-			return query select 0 as status, array['Текущий email пользователя занят'] as email, array[]::text[]  as nik;
+			return query select 0 as status, array[]::text[] as nik, array['Текущий email пользователя занят'] as email;
 		else
 			return query select 1 as status, array[]::text[]  as nik, array[]::text[] as email;
 		end if;
 	END;
-$function$;
+$function$
+;
+
 
 
 /* start function */
