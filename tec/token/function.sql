@@ -1,3 +1,4 @@
+/** Обрабатывается в конфиге */
 CREATE OR REPLACE FUNCTION tec.token_insert(_id_user integer, _token varchar, OUT token_ character varying)
  RETURNS character varying
  LANGUAGE plpgsql
