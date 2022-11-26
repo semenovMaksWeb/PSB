@@ -10,6 +10,7 @@ create type tec."user_check_active" AS (
 	active bool
 )
 
+
 CREATE OR REPLACE FUNCTION tec.user_get_active(_id_user int4, out user_ user_check_active)
 	RETURNS user_check_active
 	LANGUAGE plpgsql

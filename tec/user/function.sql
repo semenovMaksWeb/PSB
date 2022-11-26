@@ -3,6 +3,7 @@ DROP FUNCTION tec.user_insert;
 DROP FUNCTION tec.user_get_id;
 /* drop function */
 
+/** Обрабатывается в конфиге */
 CREATE OR REPLACE FUNCTION tec.user_insert(
 	_nik varchar,
 	_email varchar,
@@ -20,7 +21,6 @@ AS $function$
 		(nik, email, "password", surname, "name", patronymic) 
 		VALUES (_nik, _email, _password, _surname, _name, _patronymic) 
 	 	RETURNING id into id_;
-
         PERFORM tec.log_insert(id_, 'Пользователь создан');
 	END;
 $function$;

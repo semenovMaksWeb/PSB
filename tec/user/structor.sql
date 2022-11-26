@@ -3,7 +3,8 @@ CREATE TABLE tec."user" (
 	nik varchar NOT NULL,
 	email varchar NOT NULL,
 	"password" text NOT NULL,
-	active bool NOT NULL DEFAULT false,
+	active bool NOT NULL DEFAULT true,
+	confirmed bool NOT NULL DEFAULT false,
 	"name" varchar NOT NULL,
 	patronymic varchar NOT NULL,
     surname varchar NOT NULL,
@@ -13,3 +14,5 @@ CREATE TABLE tec."user" (
 
 CREATE UNIQUE INDEX user_nik_idx ON tec."user" USING btree (nik);
 CREATE UNIQUE INDEX user_email_idx ON tec."user" (email);
+
+ 
