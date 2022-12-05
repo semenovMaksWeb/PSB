@@ -23,3 +23,16 @@ begin
 END;
 $function$
 ;
+
+CREATE OR REPLACE FUNCTION public.get_result(_status int, _error varchar, out result_ json)
+ RETURNS json
+ LANGUAGE plpgsql
+AS $function$
+	BEGIN
+	 select jsonb_build_object(
+	'error_', _error,
+	'status_', _status
+) into result_;
+    END;
+$function$
+;

@@ -10,7 +10,7 @@ create type tec."user_get_profile" AS (
 )
 
 
-CREATE OR REPLACE FUNCTION tec.profile(_token character varying, OUT result_ result_type, OUT profile_ tec.user_get_profile)
+CREATE OR REPLACE FUNCTION tec.profile(_token character varying, OUT result_ json, OUT profile_ json)
  RETURNS record
  LANGUAGE plpgsql
 AS $function$
@@ -23,14 +23,23 @@ AS $function$
 			left join  tec."user" u on u.id  = t.id_user 
 			where t.value = _token and t.active = true and t.date_end > CURRENT_TIMESTAMP;
         if user_profile is null then
-        	select 0 as status_, 'Не валидный токен' as error_ into result_ ;
+			select * into result_  from public.get_result(0, 'Не валидный токен');
 		elseif user_profile.active = false then
-            select 0 as status_, 'Ваш аккаунт заблокирован' as error_ into result_ ;
+			select * into result_  from public.get_result(0, 'Ваш аккаунт заблокирован');
         elseif user_profile.confirmed = false then
-            select 0 as status_, 'Вы не подвердили аккаунт через почту' as error_ into result_ ;
+		select * into result_  from public.get_result(0, 'Вы не подвердили аккаунт через почту');
         else
-            select 1 as status_, null as error_ into result_ ;
-            profile_ = user_profile;
+			select * into result_  from public.get_result(1, null);
+			select jsonb_build_object(
+				'id', user_profile.id,
+				'nik', user_profile.nik, 
+				'email', user_profile.email,
+				'active', user_profile.active,
+				'confirmed', user_profile.confirmed,
+				'name', user_profile.name,
+				'surname', user_profile.surname,
+				'patronymic', user_profile.patronymic
+			) into profile_;
        end if;
     END;
 $function$
