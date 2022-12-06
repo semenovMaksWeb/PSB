@@ -3,7 +3,7 @@ CREATE OR REPLACE FUNCTION tec.check_right(_token character varying, _right_cons
  LANGUAGE plpgsql
 AS $function$
 	declare
-		result_profile result_profile;
+		result_profile tec.result_profile;
         check_right_user boolean;
     BEGIN
        select * into result_profile from tec.profile(_token);

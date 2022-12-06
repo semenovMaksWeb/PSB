@@ -1,3 +1,8 @@
+create type tec.result_profile as (
+	result_ json,
+	profile_ json
+)
+
 create type tec."user_get_profile" AS (
 	id int4,
 	nik varchar,
