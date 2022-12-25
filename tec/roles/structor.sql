@@ -3,6 +3,7 @@ CREATE TABLE tec.roles (
 	"name" varchar NOT NULL,
 	description text NULL,
 	active bool NOT NULL DEFAULT true,
+	const_name varchar NOT NULL,
 	CONSTRAINT roles_pk PRIMARY KEY (id)
 );
-CREATE UNIQUE INDEX roles_name_idx ON tec.roles USING btree (name);
+CREATE UNIQUE INDEX roles_const_name_idx ON tec."roles" (const_name);
