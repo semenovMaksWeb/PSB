@@ -4,11 +4,10 @@ LANGUAGE plpgsql
 AS $function$
     BEGIN
     RETURN query
-        select rr.id_right from  tec.user u
-            left join tec.roles_user ru on ru.id_user = u.id
+        select rr.id_right from tec.roles_user ru
             left join tec.roles r on ru.id_roles = r.id
             left join tec.right_roles rr on rr.id_roles = r.id 
-            where u.id = _id;
+            where ru.id_user  = _id;
     END;
 $function$;
 
@@ -18,12 +17,12 @@ LANGUAGE plpgsql
 AS $function$
     BEGIN
     RETURN query
-       select rig.id, rig."name", rig.const_name  from  tec.user u
-            left join tec.roles_user ru on ru.id_user = u.id
+       select rig.id, rig."name", rig.const_name  
+       from tec.roles_user ru
             left join tec.roles r on ru.id_roles = r.id
             left join tec.right_roles rr on rr.id_roles = r.id
             left join tec."right" rig on rig.id  = rr.id_right
-            where u.id = _id;
+            where ru.id_user = _id;
     END;
 $function$;
 
@@ -33,13 +32,15 @@ LANGUAGE plpgsql
 AS $function$
     BEGIN
     RETURN query
-        select r.id, r."name", r.const_name from tec."right" r where r.id not in (
-	        select rig.id from  tec.user u
-            left join tec.roles_user ru on ru.id_user = u.id
+        select r.id, r."name", r.const_name 
+        from tec."right" r 
+        where r.id not in (
+	        select rig.id 
+	        from  tec.roles_user ru
             left join tec.roles r on ru.id_roles = r.id
             left join tec.right_roles rr on rr.id_roles = r.id
             left join tec."right" rig on rig.id  = rr.id_right
-            where u.id = _id and rig.id is not null
+            where ru.id_user = _id and rig.id is not null
         );
     END;
 $function$;
