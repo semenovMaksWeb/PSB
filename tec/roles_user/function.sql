@@ -4,10 +4,9 @@ LANGUAGE plpgsql
 AS $function$
     BEGIN
     RETURN query
-        select r.id, r."name", r.const_name from tec."user" u
-            left join tec.roles_user ru on ru.id_user = u.id
+        select r.id, r."name", r.const_name from tec.roles_user ru
             left join tec.roles r on ru.id_roles = r.id 
-            where u.id = _id;
+            where ru.id_user = _id;
     END;
 $function$;
 
@@ -17,10 +16,9 @@ LANGUAGE plpgsql
 AS $function$
     BEGIN
     RETURN query
-        select r.id, r."name", r.const_name  from tec."user" u
-            left join tec.roles_user ru on ru.id_user = u.id
+        select r.id, r."name", r.const_name from tec.roles_user ru
             left join tec.roles r on ru.id_roles != r.id 
-            where u.id = _id;
+            where ru.id_user = _id;
     END;
 $function$;
 
