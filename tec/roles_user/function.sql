@@ -22,8 +22,22 @@ AS $function$
     END;
 $function$;
 
+
+
+CREATE OR REPLACE FUNCTION tec.roles_user_check_not_roles(_id_user integer, _id_roles integer[])
+RETURNS boolean
+LANGUAGE plpgsql
+AS $function$
+    BEGIN
+    return (select (select count(ru.id) 
+        from tec.roles_user ru 
+        where ru.id_user = _id_user and ru.id_roles = ANY (_id_roles)) = 0); 
+    END;
+$function$;
+
 select * from tec.roles_user_get_name_id(18);
 select * from tec.roles_user_not_get_name_id(18);
+select * from tec.roles_user_check_not_roles(18, ARRAY [1]);
 
 DROP FUNCTION tec.roles_user_get_name_id;
 DROP FUNCTION tec.roles_user_not_get_name_id;
