@@ -52,6 +52,15 @@ AS $function$
     END;
 $function$
 
+CREATE OR REPLACE FUNCTION tec.roles_user_delete(_id_user integer, _id_roles integer[], out result_ json)
+LANGUAGE plpgsql
+AS $function$
+    BEGIN
+        DELETE FROM tec.roles_user ru where ru.id_roles = ANY (_id_roles) and ru.id_user = _id_user;
+        select * into result_ from public.get_result(1, '');
+    END;
+$function$
+
 
 select * from tec.roles_user_get_name_id(18);
 select * from tec.roles_user_not_get_name_id(18);
