@@ -11,12 +11,12 @@ create type tec."user_check_active" AS (
 )
 
 
-CREATE OR REPLACE FUNCTION tec.user_get_active(_id_user int4, out user_ user_check_active)
-	RETURNS user_check_active
+CREATE OR REPLACE FUNCTION tec.user_get_active(_id_user int4, out user_ tec.user_check_active)
+	RETURNS tec.user_check_active
 	LANGUAGE plpgsql
 AS $function$
 	BEGIN
-       select u.id, u.active into user_  from "user" u where u.id  = _id_user;
+       select u.id, u.active into user_  from tec.user u where u.id  = _id_user;
 	END;
 $function$;
 
