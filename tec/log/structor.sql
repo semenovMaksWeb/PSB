@@ -4,5 +4,5 @@ CREATE TABLE tec.log (
 	"text" text NULL,
 	"date" timestamp NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT id_log PRIMARY KEY (id),
-	CONSTRAINT log_fk FOREIGN KEY (id_user) REFERENCES tec."user"(id)
+	CONSTRAINT log_fk FOREIGN KEY (id_user) REFERENCES tec."user"(id) ON DELETE CASCADE ON UPDATE CASCADE;
 );
