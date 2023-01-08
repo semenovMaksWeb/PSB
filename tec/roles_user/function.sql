@@ -1,3 +1,15 @@
+DROP FUNCTION tec.roles_user_get_name_id;
+DROP FUNCTION tec.roles_user_not_get_name_id; 
+DROP FUNCTION tec.roles_user_check_not_roles; 
+DROP FUNCTION tec.roles_user_insert;
+DROP FUNCTION tec.roles_user_delete;
+
+/*
+ * Функция roles_user_get_name_id
+ * @params id пользователя
+ * @return таблица ролей пользователя в виде списка
+ * @bec true
+ * */
 CREATE OR REPLACE FUNCTION tec.roles_user_get_name_id(_id integer)
 RETURNS TABLE(id integer, name varchar, const_name varchar)
 LANGUAGE plpgsql
@@ -10,6 +22,12 @@ AS $function$
     END;
 $function$;
 
+/*
+ * Функция roles_user_not_get_name_id
+ * @params id пользователя
+ * @return таблица ролей которых нет  у пользователя в виде списка
+ * @bec true
+ * */
 CREATE OR REPLACE FUNCTION tec.roles_user_not_get_name_id(_id integer)
 RETURNS TABLE(id integer, name varchar, const_name varchar)
 LANGUAGE plpgsql
@@ -23,7 +41,14 @@ AS $function$
 $function$;
 
 
-
+/*
+ * Функция roles_user_check_not_roles
+ * @params id пользователя, 
+ * @params массив ролей
+ * @return булевое значение
+ * true у пользователя нет не одной из указанных ролей 
+ * false у пользователя есть указанные роли
+ * */
 CREATE OR REPLACE FUNCTION tec.roles_user_check_not_roles(_id_user integer, _id_roles integer[])
 RETURNS boolean
 LANGUAGE plpgsql
@@ -36,6 +61,13 @@ AS $function$
 $function$;
 
 
+/*
+ * Функция roles_user_insert
+ * @params id пользователя
+ * @params массив ролей
+ * @return json валидация результата сохранение ролей через public.get_result
+ * @description проверка что нет ролей которых ходим добавить, проверка что все указанные роли существуют если все валидно то сохраняем записи.
+ * */
 CREATE OR REPLACE FUNCTION tec.roles_user_insert(_id_user integer, _id_roles integer[], out result_ json)
 LANGUAGE plpgsql
 AS $function$
@@ -45,13 +77,20 @@ AS $function$
             return;
         elseif (select * from tec.roles_check_ids(_id_roles)) = false then
             select * into result_ from public.get_result(0, 'Указанные роли не существуют');
-            return;
-        end if;
+            RETURN;
+        END IF;
         insert into tec.roles_user (id_user, id_roles) VALUES (_id_user, UNNEST(_id_roles));
         select * into result_ from public.get_result(1, '');
     END;
 $function$
 
+/*
+ * Функция roles_user_insert
+ * @params id пользователя
+ * @params массив ролей
+ * @return json валидация результата сохранение ролей через public.get_result
+ * @description удаляет массив ролей от пользователя без валидации.
+ * */
 CREATE OR REPLACE FUNCTION tec.roles_user_delete(_id_user integer, _id_roles integer[], out result_ json)
 LANGUAGE plpgsql
 AS $function$
@@ -62,10 +101,7 @@ AS $function$
 $function$
 
 
-select * from tec.roles_user_get_name_id(18);
-select * from tec.roles_user_not_get_name_id(18);
-select * from tec.roles_user_check_not_roles(18, ARRAY [1]);
-select  * from tec.roles_user_insert(18, ARRAY [1]);
-
-DROP FUNCTION tec.roles_user_get_name_id;
-DROP FUNCTION tec.roles_user_not_get_name_id;   
+--select * from tec.roles_user_get_name_id(18);
+--select * from tec.roles_user_not_get_name_id(18);
+--select * from tec.roles_user_check_not_roles(18, ARRAY [1]);
+--select * from tec.roles_user_insert(18, ARRAY [1]);  
