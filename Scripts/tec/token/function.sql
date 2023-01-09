@@ -2,6 +2,8 @@ drop function tec.token_insert;
 drop function tec.token_delete_value;
 drop function tec.token_delete_not_active;
 DROP FUNCTION tec.token_get;
+DROP function tec.token_update_date_end;
+
 /*
  * @params id пользователя
  * @params token пользователя
@@ -30,9 +32,9 @@ $function$
 CREATE OR REPLACE FUNCTION tec.token_delete_value(_token varchar, out result_ json)
 LANGUAGE plpgsql
 AS $function$
-    BEGIN
-	   DELETE FROM tec."token" t WHERE t.value = _token;
-	   select * into result_ from public.get_result(1, null);
+    begin
+	  DELETE FROM tec."token" t WHERE t.value = _token;
+	  select * into result_ from public.get_result(1, null);
     END;
 $function$;
 
@@ -69,8 +71,21 @@ AS $function$
     END;
 $function$;
 
+/*
+ * @params token пользователя
+ * @return json public.get_result
+ * @description продлевает время жизни токена
+ */
+CREATE OR REPLACE FUNCTION tec.token_update_date_end(_token varchar = null, out result_ json)
+LANGUAGE plpgsql
+AS $function$
+    begin
+	   update tec."token" set date_end = CURRENT_TIMESTAMP + '1 day' where value = _token; 
+    END;
+$function$;
 
 
+--select * from tec.token_update_date_end('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJuaWsiOiJob3hpZ2FmNDMwIiwiaWF0IjoxNjcyOTg0MTg5LCJlbWFpbCI6ImhveGlnYWY0MzBAY254Y29pbi5jb20ifQ.3i5pop0YyXBt_b3neElOh2o01L_lTBP7E5VapnbWi0c');
 --select * from tec.token_delete_value('1yJ1eXA1OiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJuaWsiOiJzZW1lbm92IiwiaWF0IjoxNjcyNjAxNzQ4LCJlbWFpbCI6InNlbWVub3ZAbWFpbC5ydSJ9.86TWeFQouC-mew5u2mbD6Lw71DKF1OQ0ufpbVM0X5M0');
 --select * from tec.token_delete_not_active();
 --select * from tec."token" t 
