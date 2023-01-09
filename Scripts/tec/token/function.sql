@@ -53,7 +53,6 @@ $function$;
 
 /*
  * @return таблицу токенов с пользователями
- * @description функция удаляет токены которые уже не валидные
  */
 CREATE OR REPLACE FUNCTION tec.token_get(_id_user int = null, _token varchar = null)
 returns table(id int, value text, date timestamp, active boolean, date_end timestamp, id_user int, email varchar, surname varchar, name varchar) 
@@ -62,8 +61,7 @@ AS $function$
     begin
 	    return query select t.*, u.email,u.surname, u."name" from tec."token" t 
 		left join tec."user" u on u.id = t.id_user
-		where  
-		case
+		where case
 			when _id_user IS NOT NULL then t.id_user = _id_user
 			when _token IS NOT NULL then t.value  = _token
 			else true 
@@ -90,4 +88,6 @@ $function$;
 --select * from tec.token_delete_not_active();
 --select * from tec."token" t 
 --select * from tec."token" t where t.date_end < CURRENT_TIMESTAMP or t.active = false
---select * from tec.token_get(_token => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJuaWsiOiJob3hpZ2FmNDMwIiwiaWF0IjoxNjcyOTg0MTg5LCJlbWFpbCI6ImhveGlnYWY0MzBAY254Y29pbi5jb20ifQ.3i5pop0YyXBt_b3neElOh2o01L_lTBP7E5VapnbWi0c', _id_user => 40)
+--select * from tec.token_get(
+--_token => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJuaWsiOiJob3hpZ2FmNDMwIiwiaWF0IjoxNjcyOTg0MTg5LCJlbWFpbCI6ImhveGlnYWY0MzBAY254Y29pbi5jb20ifQ.3i5pop0YyXBt_b3neElOh2o01L_lTBP7E5VapnbWi0c',
+--_id_user => 40)
