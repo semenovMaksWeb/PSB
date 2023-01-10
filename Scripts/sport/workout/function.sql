@@ -6,7 +6,7 @@ drop function sport.workout_insert;
  * @params массив упражнении
  * @params массив веса
  * @params дата тренировки
- * @return SETOF sport.exercises
+ * @return json
  */
  CREATE OR REPLACE FUNCTION sport.workout_insert(
 	_id_user integer, 
@@ -41,4 +41,5 @@ AS $function$
 	END;
 $function$;
 
-select * from sport.workout w where w.id_user = 25
+--select * from sport.workout w where w.id_user = 25
+--select * from  sport.workout_insert(25, array[3,5], array[10, 35]);
