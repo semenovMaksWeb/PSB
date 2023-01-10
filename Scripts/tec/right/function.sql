@@ -1,3 +1,7 @@
+/*
+ * @params id пользователя
+ * @return table (id right)
+ */
 CREATE OR REPLACE FUNCTION tec.right_get_userid(_id integer)
 RETURNS TABLE(id integer)
 LANGUAGE plpgsql
@@ -11,6 +15,10 @@ AS $function$
     END;
 $function$;
 
+/*
+ * @params id пользователя
+ * @return table right права которые есть у пользователя
+ */
 CREATE OR REPLACE FUNCTION tec.right_get_userid_list(_id integer)
 RETURNS TABLE(id integer, name varchar, const_name varchar)
 LANGUAGE plpgsql
@@ -26,6 +34,11 @@ AS $function$
     END;
 $function$;
 
+
+/*
+ * @params id пользователя
+ * @return table right права которых нет у пользователя
+ */
 CREATE OR REPLACE FUNCTION tec.right_get_not_userid_list(_id integer)
 RETURNS TABLE(id integer, name varchar, const_name varchar)
 LANGUAGE plpgsql
@@ -45,7 +58,27 @@ AS $function$
     END;
 $function$;
 
+/*
+ * @return table right 
+ */
+CREATE OR REPLACE FUNCTION tec.right_get(_const_name varchar=null, _active boolean=null)
+RETURNS TABLE(id integer, name varchar, const_name varchar, description varchar, active boolean, date timestamp)
+LANGUAGE plpgsql
+AS $function$
+    BEGIN
+    RETURN query
+        select *
+        from tec."right" r 
+        	where case
+			when _const_name IS NOT NULL then r.const_name = _const_name
+			when _active IS NOT NULL then r.active = _active
+			else true
+		end;
+    END;
+$function$;
 
-select * from tec.right_get_userid(18);
-select * from tec.right_get_userid_list(18);
-select * from tec.right_get_not_userid_list(18);
+--select * from tec.right_get_userid(18);
+--select * from tec.right_get_userid_list(18);
+--select * from tec.right_get_not_userid_list(18);
+--select * from tec."right" r 
+--select * from tec.right_get(_active => true)
