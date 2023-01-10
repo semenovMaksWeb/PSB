@@ -21,7 +21,7 @@ $function$;
 CREATE OR REPLACE FUNCTION tec.log_get_id(
     _id_user int4
 )
-	RETURNS TABLE (id int4, text text, date varchar)
+	RETURNS TABLE (id int4, text text, date text)
 	LANGUAGE plpgsql
 AS $function$
 	BEGIN
@@ -36,5 +36,7 @@ $function$;
 
 /* start function */
 select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
-select * from tec.log_get_id(1)
+select * from tec.log_get_id(25);
+select * from tec.log l 
+
 /* start function */
