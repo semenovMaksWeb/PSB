@@ -6,21 +6,18 @@ drop function sport.workout_insert;
  * @params массив упражнении
  * @params массив веса
  * @params дата тренировки
- * @return json
+ * @return id созданой записи
  */
  CREATE OR REPLACE FUNCTION sport.workout_insert(
 	_id_user integer, 
 	_ids_exercises int4[] DEFAULT array[]::integer[],
 	_weight int4[] DEFAULT array[]::integer[], 
 	_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-	OUT id_ integer, 
-	OUT result_type_ json
+	OUT id_ integer
  )
- RETURNS record
  LANGUAGE plpgsql
 AS $function$
 	BEGIN
-		select * into result_type_ FROM public.get_result(1, null);
 		insert into sport.workout (id_user, "date") values (_id_user, _date) RETURNING id into id_;
 		insert into sport.workout_exercises (id_workourt, id_exercises, weight) 
 		values (id_, unnest(_ids_exercises), unnest(_weight));
@@ -29,15 +26,15 @@ AS $function$
 $function$;
 
 /**
- * Создание тренировки
- * @params id пользователя
+ * просмотр тренировки по user_id
+ * @params table sport.workout
  */
-CREATE OR REPLACE FUNCTION sport.workout_get_id(_id integer)
+CREATE OR REPLACE FUNCTION sport.workout_get_id(_id_user integer)
  RETURNS SETOF sport.workout
  LANGUAGE plpgsql
 AS $function$
 	BEGIN
-		return query select * from sport.workout w where id  = _id;
+		return query select * from sport.workout w where w.id_user = _id_user;
 	END;
 $function$;
 
