@@ -20,6 +20,19 @@ AS $function$
 $function$;
 
 /**
+ * Просмотр упражнений без пользователя
+ * @return SETOF sport.exercises
+ */
+CREATE OR REPLACE FUNCTION sport.exercises_get_not_user()
+RETURNS SETOF sport.exercises
+LANGUAGE plpgsql
+AS $function$
+	BEGIN
+		return query select * from sport.exercises e where id_user IS NULL;
+	END;
+$function$;
+
+/**
  * Создание упражнения для конкретного пользователя
  * @params id пользователя
  * @params имя упражнения
@@ -64,6 +77,8 @@ AS $function$
 	END;
 $function$;
 
+--select * from sport.exercises e where e.id_user IS NULL
+--select * from sport.exercises_get_not_user();
 --select * from sport.exercises_delete(25, 4);
 --select * from sport.exercises_get(25);
 --select * from sport.exercises_insert(25, 'Жим лежа')
