@@ -61,5 +61,19 @@ AS $function$
 	END;
 $function$;
 
+/*
+ * изменить пароль пользователю
+ * @params id пользователя
+ * @params новый пароль
+ **/
+CREATE OR REPLACE FUNCTION tec.user_update_password(_id_user int4, _password varchar)
+returns void
+LANGUAGE plpgsql
+AS $function$
+	BEGIN
+        update tec."user" set "password" = _password where id = _id_user; 
+	END;
+$function$;
+
 --select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
 --select * from tec.user_get_id(1); 
