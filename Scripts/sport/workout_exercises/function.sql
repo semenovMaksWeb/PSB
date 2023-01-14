@@ -27,10 +27,27 @@ AS $function$
 	END;
 $function$;
 
+/**
+ * просмотр тренировки
+ * @params  id пользователя
+ * @params id тренировки
+ * @return table упражнения тренировки
+ */
+ CREATE OR REPLACE FUNCTION sport.workout_get_exercises(
+	_id_user int4,
+	_id_workourt int4
+)
+ RETURNS table (id int4, weight int4, id_exercises int4, name varchar)
+ LANGUAGE plpgsql
+AS $function$
+	begin
+		return query select we.id, we.weight, we.id_exercises, e."name" from sport.workout_exercises we 
+		left join sport.exercises e on we.id_exercises = e.id
+		left join sport.workout w on w.id = we.id_workourt
+		where w.id_user = _id_user and we.id_workourt = _id_workourt;
+	END;
+$function$;
 
-select we.id, we.weight, we.id_exercises, e."name" from sport.workout_exercises we 
-left join sport.exercises e on we.id_exercises = e.id
-left join sport.workout w on w.id = we.id_workourt
-where w.id_user = 25 and we.id_workourt = 4
 
-select * from sport.workout_exercises_update(25, 4, array[3,5], array[100, 50])
+--select * from sport.workout_get_exercises(25, 4);
+--select * from sport.workout_exercises_update(25, 4, array[3,5], array[100, 50])
