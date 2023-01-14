@@ -1,3 +1,10 @@
+drop function tec.check_right;
+
+/*
+ * @params token пользователя
+ * @return json get_result
+ * если все валидно то возвращается id пользователя
+ */
 CREATE OR REPLACE FUNCTION tec.check_right(_token character varying, _right_const_name character varying, OUT result_ json)
  RETURNS json
  LANGUAGE plpgsql

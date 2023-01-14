@@ -1,3 +1,10 @@
+drop function tec.right_roles_const_name_create;
+
+/**
+ * @params const_name роли
+ * @params const_name право
+ * техническая функция для заполнения связей ролей и прав
+ */
 CREATE OR REPLACE FUNCTION tec.right_roles_const_name_create(_roles_const_name varchar, _right_const_name varchar)
  RETURNS void 
  LANGUAGE plpgsql

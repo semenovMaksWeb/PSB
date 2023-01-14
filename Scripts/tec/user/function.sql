@@ -1,9 +1,12 @@
-/* drop function */
 DROP FUNCTION tec.user_insert;
 DROP FUNCTION tec.user_get_id;
-/* drop function */
 
-/** Обрабатывается в конфиге */
+/*
+ * создание пользователя
+ * @params данные для создания
+ * @return id пользователя
+ * @bec true
+ **/
 CREATE OR REPLACE FUNCTION tec.user_insert(
 	_nik varchar,
 	_email varchar,
@@ -25,6 +28,12 @@ AS $function$
 	END;
 $function$;
 
+/*
+ * вернуть пользователя по id_user
+ * @params id пользователя
+ * @return таблица пользователя
+ * @bec true
+ **/
 CREATE OR REPLACE FUNCTION tec.user_get_id(_id_user int4)
 	RETURNS TABLE(
 		id int, 
@@ -52,10 +61,5 @@ AS $function$
 	END;
 $function$;
 
-
-
-
-/* start function */
-select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
-select * from tec.user_get_id(1); 
-/* start function */
+--select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
+--select * from tec.user_get_id(1); 

@@ -1,8 +1,12 @@
-/* drop function */
 DROP FUNCTION tec.log_insert;
 DROP FUNCTION tec.log_get_id;
-/* drop function */
 
+/*
+ * создает новую запись в таблицу log
+ * @params id пользователя
+ * @params text логирования
+ * @return id новой записи
+ */
 CREATE OR REPLACE FUNCTION tec.log_insert(
     _id_user int4,
     _text text,
@@ -18,6 +22,11 @@ AS $function$
 	END;
 $function$;
 
+/*
+ * просмотр логирования для конкретного пользователя
+ * @params id пользователя
+ * @return Table log
+ */
 CREATE OR REPLACE FUNCTION tec.log_get_id(
     _id_user int4
 )
@@ -31,12 +40,8 @@ AS $function$
 	END;
 $function$;
 
+--select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
+--select * from tec.log_get_id(25);
+--select * from tec.log l 
 
-
-
-/* start function */
-select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
-select * from tec.log_get_id(25);
-select * from tec.log l 
-
-/* start function */
+ 

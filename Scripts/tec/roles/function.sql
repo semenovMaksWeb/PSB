@@ -56,7 +56,7 @@ AS $function$
 $function$;
 
 
-select * from tec.roles r where r.active = true and r.const_name = 'admin'
+--select * from tec.roles r where r.active = true and r.const_name = 'admin'
 
 --select * from tec.roles_check_id(1)
 --select * from tec.roles_check_ids(array[1,2])

@@ -1,7 +1,21 @@
+/**
+ * возможно old
+ */
 create type public."result_type" AS (
 	status_ int,
 	error_ text
 )
+
+/*
+ * возможно не нужная функция из за неизвестного безопастной её использования
+ * универсальная функция создания sql запроса учитывая передаваемые параметры
+ * @params sql первоначальный sql код
+ * @params limit количество строк
+ * @params offset количество пропускаемых строк
+ * @params where строка с условиями
+ * @params order_by строка с сортировкой
+ * @return строка sql кода
+ **/
 CREATE OR REPLACE FUNCTION public.table_get(_sql character varying, _limit integer DEFAULT NULL::integer, _offset integer DEFAULT NULL::integer, _order_by character varying DEFAULT NULL::character varying, _where text DEFAULT NULL::text)
  RETURNS character varying
  LANGUAGE plpgsql
@@ -24,6 +38,11 @@ END;
 $function$
 ;
 
+/*
+ * функция конвертация в json
+ * @params _status, _error
+ * @return json
+ **/
 CREATE OR REPLACE FUNCTION public.get_result(_status int, _error varchar, out result_ json)
  RETURNS json
  LANGUAGE plpgsql
@@ -34,5 +53,4 @@ AS $function$
 	'status', _status
 ) into result_;
     END;
-$function$
-;
+$function$;

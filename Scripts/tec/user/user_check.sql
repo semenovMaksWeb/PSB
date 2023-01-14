@@ -1,9 +1,8 @@
-/* drop function */
 DROP FUNCTION tec.user_get_active;
 DROP FUNCTION tec.user_check;
 DROP FUNCTION tec.user_check_active;
 DROP FUNCTION tec.user_check_id;
-/* drop function */
+
 
 create type tec."user_check_active" AS (
 	id int4,
@@ -64,7 +63,12 @@ AS $function$
 	END;
 $function$;
 
-/** Обрабатывается в конфиге */
+/*
+ * проверка уникальности данных при создании пользователя на nik и email
+ * @params nik, email
+ * @return json get_result
+ * @bec true
+ **/
 CREATE OR REPLACE FUNCTION tec.user_check_unique(_nik character varying, _email character varying)
  RETURNS TABLE(status integer, nik text[], email text[])
  LANGUAGE plpgsql
@@ -85,12 +89,11 @@ AS $function$
 			return query select 1 as status, array[]::text[]  as nik, array[]::text[] as email;
 		end if;
 	END;
-$function$
-;
+$function$;
 
 
 
 /* start function */
-select * from tec.user_get_active(1); 
-select * from tec.user_check(1);
+--select * from tec.user_get_active(1); 
+--select * from tec.user_check(1);
 /* start function */

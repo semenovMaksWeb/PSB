@@ -1,9 +1,15 @@
+/**
+ * возможно old 
+ */
 create type tec.result_profile as (
 	result_ json,
 	profile_ json
 )
 
-create type tec."user_get_profile" AS (
+/**
+ * type данных пользователя возвращаемых при валидной аундификации
+ */
+CREATE TYPE tec."user_get_profile" AS (
 	id int4,
 	nik varchar,
 	email varchar,
@@ -14,7 +20,13 @@ create type tec."user_get_profile" AS (
 	patronymic varchar
 )
 
-
+/*
+ * валидация профиля пользователя + возвращение профиль пользователю
+ * @params token пользователя
+ * @params text логирования
+ * @return json get_result
+ * @return tec."user_get_profile" - профиль пользователя
+ */
 CREATE OR REPLACE FUNCTION tec.profile(_token character varying, OUT result_ json, OUT profile_ json)
  RETURNS record
  LANGUAGE plpgsql

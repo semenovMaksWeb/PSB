@@ -1,5 +1,7 @@
-drop function tec.right_roles_const_name_create
+drop function tec.right_roles_const_name_create;
+
 /**
+ * функция получения всех прав по id_roles
  * @params id роли
  * @return table right
  */

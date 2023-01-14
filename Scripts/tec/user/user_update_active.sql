@@ -1,23 +1,27 @@
-/* drop function */
 DROP FUNCTION tec.user_update_confirmed;
-/* drop function */
 
-CREATE OR REPLACE FUNCTION tec.user_update_confirmed(_id_user int4, out result_type_ result_type)
-	RETURNS result_type
+/*
+ * подверждения почты пользователем
+ * @params id_user
+ * @return id пользователя
+ * @bec true
+ **/
+CREATE OR REPLACE FUNCTION tec.user_update_confirmed(_id_user int4, out result_type_ json)
+	RETURNS json
 	LANGUAGE plpgsql
 AS $function$
 	declare
 		user_ tec.user;
 	BEGIN
-		select 1 as status_, '' as error_ into result_type_ ;
+		select * into result_type_ from public.get_result(1, null);
        	select * into user_ from tec.user u where u.id = _id_user;
 		
 		if user_.id is null then
-			select 0 as status_, 'Пользователя не существует' as error_ into result_type_ ;
+			select * into result_type_ from public.get_result(0, 'Пользователя не существует');
     	end if;
 
 		if user_.confirmed = true then
-			select 0 as status_, 'Активация не требуется' as error_ into result_type_ ;
+		select * into result_type_ from public.get_result(0, 'Активация не требуется');
     	end if;
 
 	   	if result_type_.status_ <> 0 then 
@@ -28,6 +32,4 @@ AS $function$
 	END;
 $function$;
 
-/* start function */
-select * from tec.user_update_confirmed(1); 
-/* start function */
+--select * from tec.user_update_confirmed(1); 
