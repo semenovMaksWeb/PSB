@@ -61,3 +61,13 @@ select * from tec.right_roles_const_name_create('admin_constructor_command', 'be
 select * from tec.right_roles_const_name_create('analitik_command', 'constructor-command_open');
 select * from tec.right_roles_const_name_create('analitik_command', 'names-file-config-bec_get');
 select * from tec.right_roles_const_name_create('analitik_command', 'config-command_get');
+
+INSERT INTO car.car_class ("name", description) VALUES('A', 'Мини-автомобили');
+INSERT INTO car.car_class ("name", description) VALUES('B', 'Маленькие автомобили');
+INSERT INTO car.car_class ("name", description) VALUES('C', 'Среднеразмерные автомобили');
+INSERT INTO car.car_class ("name", description) VALUES('D', 'Полноразмерные автомобили');
+INSERT INTO car.car_class ("name", description) VALUES('E', 'Автомобили бизнес-класса');
+INSERT INTO car.car_class ("name", description) VALUES('F', 'Представительские автомобили');
+INSERT INTO car.car_class ("name", description) VALUES('S', 'Спортивные купе');
+INSERT INTO car.car_class ("name", description) VALUES('M', 'Минивэны и коммерческие автомобили');
+INSERT INTO car.car_class ("name", description) VALUES('J', 'Кроссоверы и внедорожники');

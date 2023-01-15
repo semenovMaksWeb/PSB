@@ -15,6 +15,20 @@ AS $function$
 $function$;
 
 /*
+ * проверка что страна с указанным id существует
+ * @params id страны
+ * @return boolean
+ */
+CREATE OR REPLACE FUNCTION libs.country_check_id(_id int, out check_ boolean)
+ RETURNS boolean
+ LANGUAGE plpgsql
+AS $function$
+	begin
+		select EXISTS(select c.id from libs.country c where id = _id) into check_;
+    END;
+$function$;
+
+/*
  * вернуть все страны
  * @return TABLE стран
  */
