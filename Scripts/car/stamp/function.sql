@@ -20,6 +20,18 @@ AS $function$
 $function$;
 
 /*
+ * проверка существования марки по id
+ * @return boolean
+ */
+CREATE OR REPLACE FUNCTION car.stamp_check_id(_id varchar, out check_ boolean)
+LANGUAGE plpgsql
+AS $function$
+	begin
+		SELECT EXISTS(select id from car.stamp s where s.id = _id) into check_;
+    END;
+$function$;
+
+/*
  * проверка уникальности
  * @return boolean
  */
@@ -60,5 +72,6 @@ AS $function$
 		values (_name, _logo, _date_foundation, _description, _id_country);
     END;
 $function$;
+
 --select * from car.stamp_insert('lada', 'lada.png', '1966-01-01', 1);
 --select * from car.stamp_get();
