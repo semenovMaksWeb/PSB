@@ -36,8 +36,8 @@ AS $function$
 $function$;
 
 /*
- * Проверить существования технические группы характеристик автомобилей по id
- * @return boolean
+ * Создать техническую группу характеристик автомобиля
+ * @return json
  */
 CREATE OR REPLACE FUNCTION car.tec_group_insert(_name varchar, out result_ json)
 LANGUAGE plpgsql
