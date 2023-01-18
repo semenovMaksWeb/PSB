@@ -1,6 +1,5 @@
 CREATE TABLE car.car (
 	id int NOT NULL GENERATED ALWAYS AS IDENTITY,
-	id_country int not null,
 	"name" varchar NOT NULL,
 	"date" Date NOT null,
 	description varchar NULL,

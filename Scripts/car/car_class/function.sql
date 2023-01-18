@@ -13,4 +13,17 @@ AS $function$
     END;
 $function$;
 
+
+/*
+ * проверка существования класса автомобиля по id
+ * @return boolean
+ */
+CREATE OR REPLACE FUNCTION car.car_class_check_id(_id varchar, out check_ boolean)
+LANGUAGE plpgsql
+AS $function$
+	begin
+		SELECT EXISTS(select * from car.car_class c_c where c_c.id = _id) into check_;
+    END;
+$function$;
+
 --select * from car.car_class_get()
