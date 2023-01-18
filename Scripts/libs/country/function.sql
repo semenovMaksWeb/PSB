@@ -54,10 +54,10 @@ LANGUAGE plpgsql
 AS $function$
 	begin
 		select * into result_ from public.get_result(1, null);
-		if libs.country_unique(_name) = 1 then
-			select * from public.get_result(0, 'текущие имя страны уже существует'); 
+		if libs.country_unique(_name) = true then
+			select * into result_ from public.get_result(0, 'текущие имя страны уже существует'); 
 		else
-			insert into libs.country ("name", capital, description, flag) values (_name, _capital, _flag, _description);
+			insert into libs.country ("name", capital, flag,description) values (_name, _capital, _flag, _description);
 		end if;
     END;
 $function$;
