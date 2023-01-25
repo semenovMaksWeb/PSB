@@ -32,6 +32,19 @@ $function$;
  * вернуть все страны
  * @return TABLE стран
  */
+CREATE OR REPLACE FUNCTION libs.country_get_name(_name varchar)
+RETURNS integer
+LANGUAGE plpgsql
+AS $function$
+	begin
+		return (SELECT c.id FROM libs.country c where c."name" = _name limit 1); 
+    END;
+$function$;
+
+/*
+ * вернуть все страны
+ * @return TABLE стран
+ */
 CREATE OR REPLACE FUNCTION libs.country_get()
 RETURNS setof libs.country
 LANGUAGE plpgsql
@@ -65,3 +78,4 @@ $function$;
 
 --select * from libs.country_get();
 --select * from libs.country_unique('Россия');
+--select * from libs.country_get_name('Россия');

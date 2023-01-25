@@ -54,3 +54,23 @@ AS $function$
 ) into result_;
     END;
 $function$;
+
+
+/*
+ * функция динамический inser into
+ * @table, @name, @values
+ * @return json
+ **/
+CREATE OR REPLACE FUNCTION public.insert_into_dynamic(_schema varchar,_table varchar, _column varchar, _values varchar)
+RETURNS varchar
+LANGUAGE plpgsql
+AS $function$
+	BEGIN
+		return format('insert into %I.%I (%s) VALUES (%s)', _schema, _table, _column, _values);
+    END;
+$function$; 
+
+
+--select * from public.insert_into_dynamic('tec', 'log', 'id_user,text', 'null, тестовый лог')
+--insert into tec.log (id_user,text) VALUES (null, 'тестовый лог')
+ 

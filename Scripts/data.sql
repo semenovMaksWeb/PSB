@@ -14,22 +14,6 @@ INSERT INTO tec."right" ("name", const_name, description, active, "date") VALUES
 INSERT INTO tec."right" ("name", const_name, description, active, "date") VALUES('Удаления файлов конфигурации команд', 'config-command_delete', 'Удаления файлов конфигурации команд', true, '2022-12-25 12:52:07.082');
 INSERT INTO tec."right" ("name", const_name, description, active, "date") VALUES('Запуск api команд с передачей конфига json', 'bec-command-test_start', 'Запуск api команд с передачей конфига json', true, '2022-12-25 12:58:33.303');
 
-INSERT INTO public.exercises ("name", id_user) VALUES('Жим ногами лежа', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Сгибание ног в тренажере', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Сведение ног в тренажере', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Разгибание ног на блочном тренажере', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Жим лежа', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Сведения в тренажере «Бабочка»', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Тяга вертикального блока', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Тяга горизонтального блока', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Жим Арнольда', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Подъем гантелей через стороны', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Поднятие штанги к подбородку', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Подъем гантелей перед собой', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Сгибание рук в кроссовере', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('Разгибание рук в кроссовере', 1);
-INSERT INTO public.exercises ("name", id_user) VALUES('французский жим лежа', 1);
-
 INSERT INTO tec.roles ("name", description, active, const_name) VALUES('Админ', 'Админская роль', true, 'admin');
 INSERT INTO tec.roles ("name", description, active, const_name) VALUES('Конструктор команд', 'Конструктор команд, может работать с конфигурациями команд без ограничении', true, 'admin_constructor_command');
 INSERT INTO tec.roles ("name", description, active, const_name) VALUES('Аналитик команд', 'Может просмотривать команды, нет прав на изменения', true, 'analitik_command');
