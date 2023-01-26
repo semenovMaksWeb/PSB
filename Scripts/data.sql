@@ -13,6 +13,9 @@ INSERT INTO tec."right" ("name", const_name, description, active, "date") VALUES
 INSERT INTO tec."right" ("name", const_name, description, active, "date") VALUES('Изменения файлов конфигурации команд', 'config-command_update', 'Изменения файлов конфигурации команд', true, '2022-12-25 12:51:42.303');
 INSERT INTO tec."right" ("name", const_name, description, active, "date") VALUES('Удаления файлов конфигурации команд', 'config-command_delete', 'Удаления файлов конфигурации команд', true, '2022-12-25 12:52:07.082');
 INSERT INTO tec."right" ("name", const_name, description, active, "date") VALUES('Запуск api команд с передачей конфига json', 'bec-command-test_start', 'Запуск api команд с передачей конфига json', true, '2022-12-25 12:58:33.303');
+INSERT INTO tec."right" ("name", const_name, description, active, "date") VALUES('Вызов технических функции', 'bec-command-tec-start', 'Вызов технических api с закрытым доступом', true, '2022-12-25 12:58:33.303');
+
+
 
 INSERT INTO tec.roles ("name", description, active, const_name) VALUES('Админ', 'Админская роль', true, 'admin');
 INSERT INTO tec.roles ("name", description, active, const_name) VALUES('Конструктор команд', 'Конструктор команд, может работать с конфигурациями команд без ограничении', true, 'admin_constructor_command');
@@ -34,6 +37,7 @@ select * from tec.right_roles_const_name_create('admin', 'names-file-config-bec_
 select * from tec.right_roles_const_name_create('admin', 'config-command_update');
 select * from tec.right_roles_const_name_create('admin', 'config-command_delete');
 select * from tec.right_roles_const_name_create('admin', 'bec-command-test_start');
+select * from tec.right_roles_const_name_create('admin', 'bec-command-tec-start');
 
 select * from tec.right_roles_const_name_create('admin_constructor_command', 'constructor-command_open');
 select * from tec.right_roles_const_name_create('admin_constructor_command', 'names-file-config-bec_get');
