@@ -1,0 +1,2 @@
+CREATE SCHEMA games AUTHORIZATION postgres;
+COMMENT ON SCHEMA games IS 'схема игр';
