@@ -1,0 +1,6 @@
+CREATE TABLE libs.oc (
+	id int NOT NULL GENERATED ALWAYS AS IDENTITY,
+	"name" varchar NOT NULL,
+	CONSTRAINT oc_pk PRIMARY KEY (id),
+	CONSTRAINT oc_un UNIQUE ("name")
+);
