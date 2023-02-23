@@ -75,5 +75,56 @@ AS $function$
 	END;
 $function$;
 
+
+/*
+ * получить список пользователей в виде таблицы
+ * _id фильтр по id
+ * _active фильтр по активности
+ * _confirmed фильтр по подвержденным пользователям
+ * _surname поиск like по фамилии
+ * _limit лимит строк
+ * _offset сколько пропустить строк
+ **/
+CREATE OR REPLACE FUNCTION tec.user_get(
+	_id int = null,
+	_active boolean = null,
+	_confirmed boolean = null,
+	_surname varchar = null,
+	_limit int = null,
+	_offset int = null 
+	)
+	RETURNS TABLE(
+		id int, 
+		nik varchar,
+		email varchar, 
+		active boolean, 
+		surname varchar,
+		"name" varchar, 
+		patronymic varchar,
+		confirmed boolean
+		)
+	LANGUAGE plpgsql
+AS $function$
+	BEGIN
+        return query select 
+			u.id as id,
+			u.nik  as nik, 
+			u.email as email, 
+			u.active as active, 
+			u.surname as surname,
+			u."name" as name,
+			u.patronymic as patronymic,
+			u.confirmed as confirmed
+		from tec."user" u
+		where 
+		(u.id = _id OR _id IS NULL) and
+		(u.active = _active OR _active IS NULL) and
+		(u.confirmed = _confirmed OR _confirmed IS NULL) and
+		(LOWER(u.surname) like (LOWER(_surname) || '%') or _surname is null )
+		limit _limit
+		offset _offset;
+	END;
+$function$;
+ 
 --select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
 --select * from tec.user_get_id(1); 
