@@ -5,7 +5,7 @@ drop function tec.right_roles_const_name_create;
  * @params id роли
  * @return table right
  */
-CREATE OR REPLACE FUNCTION tec.get_right_roles(_id_roles int)
+CREATE OR REPLACE FUNCTION tec.right_roles_get(_id_roles int)
  RETURNS table (id int, name varchar, const_name varchar, description varchar, active boolean, date timestamp) 
  LANGUAGE plpgsql
 AS $function$
