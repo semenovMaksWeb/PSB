@@ -75,6 +75,22 @@ AS $function$
 	END;
 $function$;
 
+/**
+ * функция изменения активности у пользователя
+ * @params id пользователя
+ * @params _active активность пользователя
+ */
+CREATE OR REPLACE FUNCTION tec.user_update_active(
+	_active boolean,
+	_id int
+)
+RETURNS void
+LANGUAGE plpgsql
+AS $function$
+	begin
+		update tec."user" set active = _active where id = _id;
+	END
+$function$;
 
 /*
  * получить список пользователей в виде таблицы
@@ -128,3 +144,4 @@ $function$;
  
 --select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
 --select * from tec.user_get_id(1); 
+--select * from tec.user_update_active(true ,59)
