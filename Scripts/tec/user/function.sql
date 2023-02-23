@@ -75,6 +75,33 @@ AS $function$
 	END;
 $function$;
 
+
+/**
+ *  изменения пользователя
+ * @params _id - id пользователя
+ * @params _nik - ник пользователя
+ * @params _name - имя пользователя
+ * @params _surname - фамилия пользователя
+ * @params _patronymic - отчество пользователя
+ */
+
+CREATE OR REPLACE FUNCTION tec.user_update(
+	_id int,
+	_nik varchar,
+	_name varchar,
+	_surname varchar,
+	_patronymic varchar
+)
+RETURNS void
+LANGUAGE plpgsql
+AS $function$
+	begin
+		update tec."user" 
+		set nik = _nik, "name" = _name, patronymic = _patronymic, surname = _surname  
+		where id = _id;
+	END
+$function$;
+
 /**
  * функция изменения активности у пользователя
  * @params id пользователя
@@ -145,3 +172,4 @@ $function$;
 --select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
 --select * from tec.user_get_id(1); 
 --select * from tec.user_update_active(true ,59)
+--select * from tec.user_update(59, 'maksim', 'Макс', 'Семенов', 'Тест')
