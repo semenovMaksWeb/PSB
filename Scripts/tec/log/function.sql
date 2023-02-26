@@ -67,7 +67,6 @@ $function$;
  * удаление лога по дате between
  * @params date_start дата лога(с) (фильтр)
  * @params date_end дата лога(по) (фильтр)
- * @return id удаленного лога
  */
 CREATE OR REPLACE FUNCTION tec.log_delete_date(
 	 _date_start timestamp,
@@ -81,7 +80,7 @@ begin
 end
 $function$;
 
-select * from tec.log_delete_date(_date_start => '2023-01-06 00:00:00', _date_end => '2023-01-10 00:00:00');
+--select * from tec.log_delete_date(_date_start => '2023-01-06 00:00:00', _date_end => '2023-01-10 00:00:00');
 --select * from tec.log_delete_id(106);
 --select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
 --select * from tec.log_get (_date_start => '2023-01-06 00:00:00', _date_end => '2023-01-10 00:00:00')

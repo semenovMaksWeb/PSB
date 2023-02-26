@@ -1,5 +1,3 @@
-drop function tec.right_roles_const_name_create;
-
 /**
  * функция получения всех прав по id_roles
  * @params id роли
@@ -16,4 +14,4 @@ AS $function$
     END;
 $function$;
 
---select * from tec.get_right_roles(1);
+--select * from tec.right_roles_get(1);
