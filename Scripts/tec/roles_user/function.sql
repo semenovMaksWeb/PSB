@@ -85,7 +85,7 @@ AS $function$
 $function$
 
 /*
- * Функция roles_user_insert
+ * Функция roles_user_delete
  * @params id пользователя
  * @params массив ролей
  * @return json валидация результата сохранение ролей через public.get_result
