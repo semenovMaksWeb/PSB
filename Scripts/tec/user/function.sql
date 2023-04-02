@@ -5,7 +5,6 @@ DROP FUNCTION tec.user_get_id;
  * создание пользователя
  * @params данные для создания
  * @return id пользователя
- * @bec true
  **/
 CREATE OR REPLACE FUNCTION tec.user_insert(
 	_nik varchar,
@@ -27,12 +26,12 @@ AS $function$
         PERFORM tec.log_insert(id_, 'Пользователь создан');
 	END;
 $function$;
+COMMENT ON FUNCTION tec.user_insert(in varchar, in varchar, in text, in varchar, in varchar, in varchar, out int4) IS 'функция создания пользователя';
 
 /*
  * вернуть пользователя по id_user
  * @params id пользователя
  * @return таблица пользователя
- * @bec true
  **/
 CREATE OR REPLACE FUNCTION tec.user_get_id(_id_user int4)
 	RETURNS TABLE(
@@ -74,7 +73,7 @@ AS $function$
         update tec."user" set "password" = _password where id = _id_user; 
 	END;
 $function$;
-
+COMMENT ON FUNCTION tec.user_update_password(int4, varchar) IS 'Изменить пароль пользователю';
 
 /**
  *  изменения пользователя
@@ -145,7 +144,7 @@ CREATE OR REPLACE FUNCTION tec.user_get(
 		"name" varchar, 
 		patronymic varchar,
 		confirmed boolean
-		)
+	)
 	LANGUAGE plpgsql
 AS $function$
 	BEGIN
