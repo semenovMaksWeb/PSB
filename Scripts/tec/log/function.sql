@@ -10,9 +10,9 @@ DROP FUNCTION tec.log_delete_date;
  * @return id новой записи
  */
 CREATE OR REPLACE FUNCTION tec.log_insert(
-    _id_user int4,
-    _text text,
-    out id_ int
+    _id_user int4, -- id пользователя
+    _text text, -- текст лога
+    out id_ int -- id новой записи
 )
 	RETURNS int4
 	LANGUAGE plpgsql
@@ -32,9 +32,9 @@ $function$;
  * @return Table log
  */
 CREATE OR REPLACE FUNCTION tec.log_get(
-    _id_user int4 = null,
-    _date_start timestamp =  null,
-    _date_end timestamp =  null
+    _id_user int4 = null, -- id пользователя (фильтр)
+    _date_start timestamp =  null, -- дата с (фильтр)
+    _date_end timestamp =  null -- дата по(фильтр)
 )
 	RETURNS TABLE (id int4, text text, date text)
 	LANGUAGE plpgsql
@@ -54,7 +54,7 @@ $function$;
  * @return id удаленного лога
  */
 CREATE OR REPLACE FUNCTION tec.log_delete_id(
-	_id int
+	_id int -- id записи
 )
 	RETURNS int
 	LANGUAGE plpgsql
@@ -71,8 +71,8 @@ $function$;
  * @params date_end дата лога(по) (фильтр)
  */
 CREATE OR REPLACE FUNCTION tec.log_delete_date(
-	 _date_start timestamp,
-	_date_end timestamp
+	 _date_start timestamp, -- дата лога(с) (фильтр)
+	 _date_end timestamp -- дата лога(по) (фильтр)
 )
 	RETURNS void
 	LANGUAGE plpgsql
