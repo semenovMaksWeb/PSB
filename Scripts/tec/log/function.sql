@@ -1,5 +1,7 @@
 DROP FUNCTION tec.log_insert;
 DROP FUNCTION tec.log_get;
+DROP FUNCTION tec.log_delete_id;
+DROP FUNCTION tec.log_delete_date;
 
 /*
  * создает новую запись в таблицу log
@@ -42,7 +44,7 @@ AS $function$
         from tec.log l
         where 
        (l.id_user = _id_user or _id_user is null) and 
-       ((l.date between _date_start and _date_end) or (_date_start is null and  _date_end is null));
+       ((l.date between _date_start and _date_end) or (_date_start is null and _date_end is null));
 	END;
 $function$;
 
@@ -80,10 +82,14 @@ begin
 end
 $function$;
 
+COMMENT ON FUNCTION tec.log_delete_date(timestamp, timestamp) IS 'Удаление логов по дате between';
+COMMENT ON FUNCTION tec.log_delete_id(int4) IS 'Удаление лога по id';
+COMMENT ON FUNCTION tec.log_get(int4, timestamp, timestamp) IS 'Просмотр логов';
+COMMENT ON FUNCTION tec.log_insert(in int4, in text, out int4) IS 'Создание логов';
+
 --select * from tec.log_delete_date(_date_start => '2023-01-06 00:00:00', _date_end => '2023-01-10 00:00:00');
 --select * from tec.log_delete_id(106);
 --select * from tec.user_insert('semenov', 'semenov@mail.ru', '1234', 'Семенов', 'Максим', 'Александрович');
 --select * from tec.log_get (_date_start => '2023-01-06 00:00:00', _date_end => '2023-01-10 00:00:00')
---select * from tec.log l 
 
  
