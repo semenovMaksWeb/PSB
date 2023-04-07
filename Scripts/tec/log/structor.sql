@@ -5,3 +5,10 @@ CREATE TABLE tec.log (
 	"date" timestamp NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT id_log PRIMARY KEY (id)
 );
+
+COMMENT ON TABLE tec.log IS 'Таблица для логов';
+
+COMMENT ON COLUMN tec.log.id IS 'Первичный ключ';
+COMMENT ON COLUMN tec.log.id_user IS 'Внешний ключ пользователя';
+COMMENT ON COLUMN tec.log."text" IS 'Текст консоли';
+COMMENT ON COLUMN tec.log."date" IS 'Дата создания записи';

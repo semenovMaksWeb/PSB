@@ -16,11 +16,15 @@ CREATE UNIQUE INDEX user_nik_idx ON tec."user" USING btree (nik);
 CREATE UNIQUE INDEX user_email_idx ON tec."user" (email);
 
 COMMENT ON COLUMN tec."user".id IS 'Первичный ключ';
-COMMENT ON COLUMN tec."user".nik IS 'уникальное имя пользователя';
-COMMENT ON COLUMN tec."user"."password" IS 'пароль пользователя';
-COMMENT ON COLUMN tec."user".active IS 'проверка на возможность работать пользователю';
-COMMENT ON COLUMN tec."user"."name" IS 'подвержденность пользователя';
-COMMENT ON COLUMN tec."user".patronymic IS 'имя пользователя';
-COMMENT ON COLUMN tec."user".surname IS 'отчество пользователя';
-COMMENT ON COLUMN tec."user"."date" IS 'фамилия пользователя';
-COMMENT ON COLUMN tec."user".confirmed IS 'дата создания пользователя';
+COMMENT ON COLUMN tec."user".nik IS 'Уникальное имя пользователя';
+COMMENT ON COLUMN tec."user".email IS 'Почта пользователя';
+COMMENT ON COLUMN tec."user"."password" IS 'Пароль пользователя';
+COMMENT ON COLUMN tec."user".active IS 'Проверка на возможность работать пользователю';
+COMMENT ON COLUMN tec."user"."name" IS 'Подвержденность пользователя';
+COMMENT ON COLUMN tec."user".patronymic IS 'Имя пользователя';
+COMMENT ON COLUMN tec."user".surname IS 'Отчество пользователя';
+COMMENT ON COLUMN tec."user"."date" IS 'Фамилия пользователя';
+COMMENT ON COLUMN tec."user".confirmed IS 'Дата создания пользователя';
+
+
+COMMENT ON TABLE tec."user" IS 'Таблица для  пользователей';
